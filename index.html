@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>glimbeam - a fast launcher for GNOME</title>
+  <meta name="description" content="A small, fast Spotlight-style launcher for GNOME. Apps first, files second, web searches when you ask. Free and open source.">
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:title" content="glimbeam - a fast launcher for GNOME">
+  <meta property="og:description" content="Press Alt+Space, type, press Enter. Free and open source.">
+  <!-- Social previews need an absolute URL: prefix with the site's address once it has one. -->
+  <meta property="og:image" content="https://glimbeam.holdmybeer.dev/img/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="img/icon-512.png" type="image/png" sizes="512x512">
+  <link rel="apple-touch-icon" href="img/icon-512.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu+Sans:wght@400;500;700&family=Ubuntu+Sans+Mono&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Theme state for the whole page. "System" follows prefers-color-scheme,
+       the same way glimbeam follows GNOME's style setting. -->
+  <input class="theme-radio" type="radio" name="theme" id="theme-system" checked>
+  <input class="theme-radio" type="radio" name="theme" id="theme-light">
+  <input class="theme-radio" type="radio" name="theme" id="theme-dark">
+
+  <header class="nav wrap">
+    <a class="brand" href="#top" aria-label="glimbeam home">
+      <img src="img/icon.svg" alt="" width="28" height="28">
+      <span>glimbeam</span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#features">Features</a>
+      <a href="#install">Install</a>
+      <a href="https://github.com/michev/glimbeam">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <p class="eyebrow">Free and open source &bull; MIT</p>
+      <h1>Press <kbd>Alt</kbd>+<kbd>Space</kbd>.<br>Type. Hit <kbd>Enter</kbd>.</h1>
+      <p class="lede">A small, fast Spotlight-style launcher for GNOME. Apps first, files second, web searches when you ask.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#install">Install</a>
+        <a class="btn" href="https://github.com/michev/glimbeam">View on GitHub</a>
+      </div>
+
+      <figure class="stage">
+        <div class="topbar" aria-hidden="true">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span class="clock">Thu 5 Nov&ensp;10:24</span>
+          <span class="tray"><i></i><i></i><i></i></span>
+        </div>
+        <div class="stage-shot">
+          <img class="only-light" src="img/hero-light.webp" width="732" height="318" alt="glimbeam open with the query “set”, listing Settings, Security Center, Sublime Text, Software Updater and Take a Screenshot">
+          <img class="only-dark" src="img/hero-dark.webp" width="732" height="318" alt="The same results in GNOME's dark style" loading="lazy">
+        </div>
+      </figure>
+
+      <div class="theme-switch" role="radiogroup" aria-label="Page style">
+        <span class="switch-label">Follows your GNOME style</span>
+        <div class="segmented">
+          <label for="theme-system">System</label>
+          <label for="theme-light">Light</label>
+          <label for="theme-dark">Dark</label>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats wrap" aria-label="At a glance">
+      <div><strong>&lt; 100 KB</strong><span>binary</span></div>
+      <div><strong>&lt; 10 MB</strong><span>memory while resident</span></div>
+      <div><strong>~1.3 µs</strong><span>per keystroke</span></div>
+      <div><strong>GTK + GIO</strong><span>nothing GNOME doesn't ship</span></div>
+    </section>
+
+    <section id="features" class="features wrap">
+      <article class="card">
+        <div class="card-text">
+          <h2>Apps first, matched loosely</h2>
+          <p><code>stg</code> finds Settings, and the matched letters show why. Apps you launch often drift to the top.</p>
+        </div>
+        <div class="card-shot">
+          <img class="only-light" src="img/fuzzy-light.webp" width="732" height="182" alt="Query “stg” matching Settings, with S, t and g highlighted" loading="lazy">
+          <img class="only-dark" src="img/fuzzy-dark.webp" width="732" height="182" alt="" loading="lazy">
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-text">
+          <h2>Files when no app fits</h2>
+          <p>Nothing matches an app? It looks through your home folder instead.</p>
+        </div>
+        <div class="card-shot">
+          <img class="only-light" src="img/files-light.webp" width="732" height="284" alt="Query “invoice” listing spreadsheet, PDF and document files from the home folder" loading="lazy">
+          <img class="only-dark" src="img/files-dark.webp" width="732" height="284" alt="" loading="lazy">
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-text">
+          <h2>Web search with <code>!bangs</code></h2>
+          <p><code>!g</code>, <code>!d</code>, <code>!w</code>, <code>!gh</code> and more, before or after the query. Add your own in one plain text file. URLs open straight away.</p>
+        </div>
+        <div class="card-shot">
+          <img class="only-light" src="img/web-light.webp" width="732" height="182" alt="Query “!g rust lifetimes” offering a Google search" loading="lazy">
+          <img class="only-dark" src="img/web-dark.webp" width="732" height="182" alt="" loading="lazy">
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-text">
+          <h2>GNOME's own actions</h2>
+          <p>Lock, screenshot, suspend, log out and power off - named in your desktop's language.</p>
+        </div>
+        <div class="card-shot">
+          <img class="only-light" src="img/actions-light.webp" width="732" height="216" alt="Query “screen” listing Lock Screen and Take a Screenshot" loading="lazy">
+          <img class="only-dark" src="img/actions-dark.webp" width="732" height="216" alt="" loading="lazy">
+        </div>
+      </article>
+    </section>
+
+    <section class="theme-band wrap" aria-labelledby="theme-title">
+      <div class="theme-copy">
+        <h2 id="theme-title">At home on your desktop</h2>
+        <p>Switch GNOME between light and dark and glimbeam follows instantly - even while it's open. Icons come from your icon theme, names from your system language.</p>
+      </div>
+      <div class="split" aria-hidden="true">
+        <div class="split-layer split-light"><img src="img/hero-light.webp" width="732" height="318" alt="" loading="lazy"></div>
+        <div class="split-layer split-dark"><img src="img/hero-dark.webp" width="732" height="318" alt="" loading="lazy"></div>
+      </div>
+    </section>
+
+    <section id="install" class="install wrap">
+      <h2>Install</h2>
+      <p class="muted">Ubuntu 22.04 or newer, and other GNOME desktops on X11 or Wayland.</p>
+
+      <div class="steps">
+        <div class="step">
+          <h3>Ubuntu / Debian</h3>
+<pre><code>wget https://github.com/michev/glimbeam/releases/latest/download/glimbeam_amd64.deb
+sudo apt install ./glimbeam_amd64.deb</code></pre>
+          <p class="muted small">On ARM, use <code>glimbeam_arm64.deb</code>.</p>
+        </div>
+        <div class="step">
+          <h3>From source</h3>
+<pre><code>git clone https://github.com/michev/glimbeam
+cd glimbeam &amp;&amp; ./install.sh</code></pre>
+          <p class="muted small">Prefer another shortcut? <code>BINDING='&lt;Super&gt;space' ./install.sh</code></p>
+        </div>
+      </div>
+
+      <p class="then">Then press <kbd>Alt</kbd>+<kbd>Space</kbd>.</p>
+    </section>
+  </main>
+
+  <footer class="footer wrap">
+    <span>glimbeam is free and open source under the <a href="https://github.com/michev/glimbeam/blob/main/LICENSE">MIT license</a>.</span>
+    <a href="https://github.com/michev/glimbeam">github.com/michev/glimbeam</a>
+  </footer>
+</body>
+</html>
