@@ -1,0 +1,53 @@
+# glimbeam
+
+> glimbeam is a small, fast Spotlight-style launcher for GNOME on Linux. Press Alt+Space, type, press Enter. It searches installed apps first, files in the home folder second, and the web only when asked with !bangs. Free and open source under the MIT license.
+
+- Written in C against GTK 3 and GIO, with no dependencies beyond what GNOME ships.
+- A binary under 100 KB, under 10 MB of memory while resident, about 1.3 µs per keystroke to search the whole application index.
+- Runs on GNOME desktops on X11 or Wayland. Packages for amd64 and arm64 are built on Ubuntu 22.04 and work there and on every newer release.
+- Nothing else: no calculator, no plugins, no scripting.
+
+## Install
+
+Ubuntu / Debian (use `glimbeam_arm64.deb` on ARM):
+
+```bash
+wget https://github.com/michev/glimbeam/releases/latest/download/glimbeam_amd64.deb
+sudo apt install ./glimbeam_amd64.deb
+```
+
+The package installs glimbeam for every user, starts it at login and binds Alt+Space. Remove it with `sudo apt remove glimbeam`, which also gives Alt+Space back to the window menu.
+
+From source:
+
+```bash
+git clone https://github.com/michev/glimbeam
+cd glimbeam && ./install.sh
+```
+
+Use another shortcut with `BINDING='<Super>space' ./install.sh`. Uninstall with `./install.sh --uninstall`.
+
+## Features
+
+- Apps first, matched loosely: `stg` finds Settings, and the matched letters are highlighted. Frequently launched apps drift to the top.
+- Files: when nothing matches an app, it searches files under the home folder.
+- Web search with !bangs before or after the query: `!g` Google, `!d` DuckDuckGo, `!y` YouTube, `!w` Wikipedia, `!gh` GitHub, `!so` Stack Overflow, `!r` Reddit, `!m` Google Maps, `!a` Amazon. Engines are configured in `~/.config/glimbeam/bangs.conf`. A query that matches no app or file falls back to the default engine.
+- URLs: typing a URL, `localhost:3000` or an IP address opens it in the default browser.
+- GNOME system actions: Take a Screenshot, Lock Screen, Log Out, Suspend, Power Off, named in the desktop's language.
+- Follows GNOME's light and dark style instantly, uses the icon theme and the system language.
+
+## Questions
+
+- Wayland: yes, on both Wayland and X11. Alt+Space is an ordinary GNOME custom shortcut, so GNOME catches the key in both sessions.
+- KDE, Xfce and other desktops: no, it needs GNOME. The shortcut is set through GNOME's settings and the system actions talk to GNOME Shell.
+- Compared with GNOME's Activities search: Activities search fills the screen and looks through apps, settings, files and more. glimbeam is a small popup: apps first, files only if no app matches, plus !bang searches and URLs. You can use both.
+- Compared with Ulauncher, Albert or Vicinae: those have extensions. Ulauncher also has a calculator, Albert takes Python plugins, Vicinae runs Raycast extensions. glimbeam has none of that, which is how it stays small and fast. If you need extensions, use one of those.
+- Privacy: no background file index. It walks the home folder only when no app matches, skipping hidden files and folders. Nothing goes over the network unless you pick a web search. The only stored data is a per-app launch count in `~/.local/share/glimbeam/usage`, which ranks frequently launched apps higher.
+- Changing the shortcut: Settings → Keyboard → Custom Shortcuts, or `BINDING='<Super>space' glimbeam-setup`.
+
+## Links
+
+- [Website](https://glimbeam.holdmybeer.dev/): overview, screenshots and install steps
+- [Source code and full documentation (README)](https://github.com/michev/glimbeam): keys, flags, bang configuration, translations, development
+- [Releases](https://github.com/michev/glimbeam/releases/latest): .deb packages for amd64 and arm64
+- [License (MIT)](https://github.com/michev/glimbeam/blob/main/LICENSE)

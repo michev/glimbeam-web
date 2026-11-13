@@ -6,18 +6,124 @@
   <title>glimbeam - a fast launcher for GNOME</title>
   <meta name="description" content="A small, fast Spotlight-style launcher for GNOME. Apps first, files second, web searches when you ask. Free and open source.">
   <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://glimbeam.holdmybeer.dev/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="glimbeam">
+  <meta property="og:url" content="https://glimbeam.holdmybeer.dev/">
   <meta property="og:title" content="glimbeam - a fast launcher for GNOME">
   <meta property="og:description" content="Press Alt+Space, type, press Enter. Free and open source.">
-  <!-- Social previews need an absolute URL: prefix with the site's address once it has one. -->
   <meta property="og:image" content="https://glimbeam.holdmybeer.dev/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="glimbeam, a Spotlight-style launcher for GNOME">
   <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "glimbeam",
+    "description": "A small, fast Spotlight-style launcher for GNOME on Linux. Apps first, files second, web searches with !bangs when you ask. Opens on Alt+Space.",
+    "url": "https://glimbeam.holdmybeer.dev/",
+    "image": "https://glimbeam.holdmybeer.dev/img/og.png",
+    "screenshot": "https://glimbeam.holdmybeer.dev/img/hero-light.webp",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Linux (GNOME on X11 or Wayland; Ubuntu 22.04 or newer)",
+    "softwareRequirements": "GTK 3, GIO",
+    "downloadUrl": "https://github.com/michev/glimbeam/releases/latest",
+    "installUrl": "https://glimbeam.holdmybeer.dev/#install",
+    "license": "https://opensource.org/licenses/MIT",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "Desislav Michev", "url": "https://github.com/michev" },
+    "sameAs": ["https://github.com/michev/glimbeam"],
+    "featureList": [
+      "Fuzzy matching of installed applications, with matched letters highlighted",
+      "Frequently launched apps rank higher over time",
+      "Falls back to searching files in the home folder when no app matches",
+      "Web searches with !bangs such as !g, !d, !w and !gh, configurable in a plain text file",
+      "Opens typed URLs in the default browser",
+      "GNOME system actions: lock, screenshot, suspend, log out, power off",
+      "Follows GNOME light and dark style and the system language"
+    ]
+  }
+  </script>
   <link rel="icon" href="img/icon.svg" type="image/svg+xml">
   <link rel="icon" href="img/icon-512.png" type="image/png" sizes="512x512">
   <link rel="apple-touch-icon" href="img/icon-512.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu+Sans:wght@400;500;700&family=Ubuntu+Sans+Mono&display=swap">
+  <link rel="preload" href="fonts/UbuntuSans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does it work on Wayland?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, on both Wayland and X11. Alt+Space is an ordinary GNOME custom shortcut, so GNOME itself catches the key in both sessions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work on KDE, Xfce or other desktops?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, it needs GNOME. The shortcut is set through GNOME's settings and the system actions talk to GNOME Shell."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is it different from GNOME's Activities search?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Activities search fills the screen and looks through apps, settings, files and more. glimbeam is a small popup: apps first, files only if no app matches, plus !bang searches and URLs. You can use both."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is it different from Ulauncher, Albert or Vicinae?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Those have extensions: Ulauncher also has a calculator, Albert takes Python plugins, Vicinae runs Raycast extensions. glimbeam has none of that, which is how it stays small and fast. If you need extensions, use one of those."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it index my files or send data anywhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. There is no background index: it walks your home folder only when no app matches, skipping hidden files and folders. Nothing goes over the network unless you pick a web search, which opens in your browser. The only thing it stores is how often you launch each app, in ~/.local/share/glimbeam/usage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I change the shortcut?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Change it in Settings -> Keyboard -> Custom Shortcuts, or run BINDING='<Super>space' glimbeam-setup. From source, pass the same BINDING to ./install.sh."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I add my own search engines?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Engines are listed one per line in ~/.config/glimbeam/bangs.conf, as key URL [name]. Add or remove lines, then run systemctl --user restart glimbeam."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I uninstall it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "sudo apt remove glimbeam for the package, or ./install.sh --uninstall from source. Both remove the shortcut and give Alt+Space back to GNOME's window menu."
+      }
+    }
+  ]
+}
+  </script>
 </head>
 <body>
   <!-- Theme state for the whole page. "System" follows prefers-color-scheme,
@@ -34,6 +140,7 @@
     <nav class="nav-links" aria-label="Main">
       <a href="#features">Features</a>
       <a href="#install">Install</a>
+      <a href="#faq">FAQ</a>
       <a href="https://github.com/michev/glimbeam">GitHub</a>
     </nav>
   </header>
@@ -42,7 +149,7 @@
     <section class="hero wrap">
       <p class="eyebrow">Free and open source &bull; MIT</p>
       <h1>Press <kbd>Alt</kbd>+<kbd>Space</kbd>.<br>Type. Hit <kbd>Enter</kbd>.</h1>
-      <p class="lede">A small, fast Spotlight-style launcher for GNOME. Apps first, files second, web searches when you ask.</p>
+      <p class="lede">A small, fast Spotlight-style launcher for GNOME on Linux. Apps first, files second, web searches when you ask.</p>
       <div class="cta">
         <a class="btn btn-primary" href="#install">Install</a>
         <a class="btn" href="https://github.com/michev/glimbeam">View on GitHub</a>
@@ -154,6 +261,45 @@ cd glimbeam &amp;&amp; ./install.sh</code></pre>
       </div>
 
       <p class="then">Then press <kbd>Alt</kbd>+<kbd>Space</kbd>.</p>
+      <p class="muted small">Changed your mind? <code>sudo apt remove glimbeam</code>, or <code>./install.sh --uninstall</code>.</p>
+    </section>
+
+    <section id="faq" class="faq wrap" aria-labelledby="faq-title">
+      <h2 id="faq-title">Questions</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3>Does it work on Wayland?</h3>
+          <p>Yes, on both Wayland and X11. Alt+Space is an ordinary GNOME custom shortcut, so GNOME itself catches the key in both sessions.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Does it work on KDE, Xfce or other desktops?</h3>
+          <p>No, it needs GNOME. The shortcut is set through GNOME's settings and the system actions talk to GNOME Shell.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How is it different from GNOME's Activities search?</h3>
+          <p>Activities search fills the screen and looks through apps, settings, files and more. glimbeam is a small popup: apps first, files only if no app matches, plus <code>!bang</code> searches and URLs. You can use both.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How is it different from Ulauncher, Albert or Vicinae?</h3>
+          <p>Those have extensions: Ulauncher also has a calculator, Albert takes Python plugins, Vicinae runs Raycast extensions. glimbeam has none of that, which is how it stays small and fast. If you need extensions, use one of those.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Does it index my files or send data anywhere?</h3>
+          <p>No. There is no background index: it walks your home folder only when no app matches, skipping hidden files and folders. Nothing goes over the network unless you pick a web search, which opens in your browser. The only thing it stores is how often you launch each app, in <code>~/.local/share/glimbeam/usage</code>.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do I change the shortcut?</h3>
+          <p>Change it in Settings&nbsp;&rarr; Keyboard&nbsp;&rarr; Custom Shortcuts, or run <code>BINDING='&lt;Super&gt;space' glimbeam-setup</code>. From source, pass the same <code>BINDING</code> to <code>./install.sh</code>.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can I add my own search engines?</h3>
+          <p>Yes. Engines are listed one per line in <code>~/.config/glimbeam/bangs.conf</code>, as <code>key URL [name]</code>. Add or remove lines, then run <code>systemctl --user restart glimbeam</code>.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do I uninstall it?</h3>
+          <p><code>sudo apt remove glimbeam</code> for the package, or <code>./install.sh --uninstall</code> from source. Both remove the shortcut and give Alt+Space back to GNOME's window menu.</p>
+        </div>
+      </div>
     </section>
   </main>
 
